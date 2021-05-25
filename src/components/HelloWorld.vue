@@ -119,12 +119,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-
+import { defineComponent, onMounted } from "vue";
+import { useStore } from "vuex";
 export default defineComponent({
   name: "HelloWorld",
   props: {
     msg: String,
+  },
+  setup() {
+    const store = useStore();
+
+    onMounted(() => {
+      console.log("mounted!");
+    });
+
+    return {
+      // access an action
+      asyncIncrement: () => store.dispatch("getData"),
+    };
   },
 });
 </script>
